@@ -17,7 +17,7 @@ class TaskCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ("title", "description", "due_date")
+        fields = ("id", "title", "description", "due_date")
 
     def validate(self, attrs):
         due_date = attrs.get("due_date")
@@ -27,3 +27,10 @@ class TaskCreateSerializer(serializers.ModelSerializer):
                 {"due_date": "Date must be today or in the future."}
             )
         return attrs
+
+
+class TasksUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Task
+        fields = ("id", "description", "completed")

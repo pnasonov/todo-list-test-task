@@ -5,7 +5,11 @@ from rest_framework import viewsets, permissions
 from rest_framework.serializers import Serializer
 
 from todo.models import Task
-from todo.serializer import TaskSerializer, TaskCreateSerializer
+from todo.serializer import (
+    TaskSerializer,
+    TaskCreateSerializer,
+    TasksUpdateSerializer,
+)
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -32,6 +36,8 @@ class TaskViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self) -> Type[Serializer]:
         if self.action == "create":
             self.serializer_class = TaskCreateSerializer
+        if self.action == "update":
+            self.serializer_class = TasksUpdateSerializer
 
         return self.serializer_class
 
